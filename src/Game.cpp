@@ -2,11 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Game::Game(unsigned int speedInit)
+Game::Game(unsigned int speedInit, unsigned int numberFood)
     : 
     speed(speedInit),
     snake(Snake()),
-    food(Food()) 
+    food(Food(numberFood)) 
     {}
 
 Game::~Game() = default;
@@ -29,4 +29,17 @@ void Game::handleInput(sf::Keyboard::Scancode keyPressed)
         // move right
         std::cout << "right\n";
     }
+}
+
+void Game::startGame() {
+    // initialisation terrain
+    // initialisation snake
+    // initialisation food
+    // drawing
+}
+
+void Game::draw() {
+    this->drawTerrain();
+    snake.draw();
+    food.draw();
 }
