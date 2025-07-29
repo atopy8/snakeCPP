@@ -1,16 +1,13 @@
 #include <SFML/Graphics.hpp>
-// clock
-#include <SFML/System/Export.hpp>
-#include <chrono>
-#include <ratio>
-#include <type_traits>
+#include <SFML/Window.hpp>
+
 
 #include "../include/Game.hpp"
 
 const unsigned int widthWindow  = 1920u;
 const unsigned int heightWindow = 1080u;
 
-const unsigned int nbLin        = 20u;
+const unsigned int nbLin        = 45u;
 const unsigned int nbCol        = 80u;
 
 const unsigned int speed        = 10u;
@@ -21,16 +18,15 @@ const unsigned int updateSpeed  = 50u;
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "SnakeCPP");
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "SnakeCPP");
     window.setFramerateLimit(144);
 
     Game* game   = new Game(speed, nbFood);
-    time_t lastTime;
-    time(&lastTime);
+    time_t lastTime = clock();
 
     while (window.isOpen())
     {
-        while (const std::optional event = window.pollEvent())
+        while (auto event = window.pollEvent())
         {
             // Closing the window
             if (event->is<sf::Event::Closed>()){
@@ -49,13 +45,16 @@ int main()
 
         
         // visual update
-        if (difftime(time(nullptr), lastTime) > updateSpeed) {
+        auto clockTime = clock(); 
+        if ((clockTime - lastTime) > updateSpeed) {
+            
+            //game->update();
             
             window.clear();
             
             
-            time(&lastTime);
-            game->draw();
+            lastTime = clock();
+            game->draw(&window);
 
 
             window.display();
