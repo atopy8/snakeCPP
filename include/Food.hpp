@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Position.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 class Food
 {
@@ -15,6 +17,6 @@ public:
 
     bool eatIfFood(unsigned int x, unsigned int y);
     bool isFoodHere(unsigned int x, unsigned int y);
-    
-    void draw();
+
+    void draw(sf::RenderWindow* window);
 };
