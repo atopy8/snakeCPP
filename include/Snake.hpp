@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SnakeBit.hpp"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 class Snake
 {
@@ -14,6 +16,6 @@ public:
 
     void changeDirection(SnakeDirection dir);
     void update();
-    void draw();
+    void draw(sf::RenderWindow* window);
 };
 
