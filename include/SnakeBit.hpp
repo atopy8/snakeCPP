@@ -4,23 +4,26 @@
 #include <SFML/Window.hpp>
 #include "SnakeDirection.hpp"
 #include "Position.hpp"
+#include "GameParameters.hpp"
 
 class SnakeBit
 {
 private:
     
-    Position* pos;
+    
 public:
+    Position pos;
     SnakeBit* next;
     SnakeBit* prec;
     SnakeDirection dir;
+    SnakeDirection nextDir;
 
     SnakeBit(SnakeBit* prec);
     ~SnakeBit();
 
     void changeDirection(SnakeDirection dir);
-    void moveToward(SnakeDirection dir);
+    void move();
     void update();
-    void draw(sf::RenderWindow* window);
+    void draw(GameParameters* param, sf::RenderWindow* window);
     
 };
