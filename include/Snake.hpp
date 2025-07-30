@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SnakeBit.hpp"
+#include "Food.hpp"
+#include "GameParameters.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -16,6 +18,8 @@ public:
 
     void changeDirection(SnakeDirection dir);
     void update();
-    void draw(sf::RenderWindow* window);
+    void draw(GameParameters* param, sf::RenderWindow* window);
+    void eatIfFood(Food* food, GameParameters* param);
+    bool stopIfDying(GameParameters* param);
 };
 
