@@ -11,14 +11,20 @@ const unsigned int nbLin        = 45u;
 const unsigned int nbCol        = 80u;
 
 const unsigned int speed        = 10u;
-const unsigned int nbFood       = 1u;
+const unsigned int nbFood       = 10u;
 
-const unsigned int updateSpeed  = 50u;
+const unsigned int updateSpeed  = 100000u;
 
 
 int main()
 {
-    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "SnakeCPP");
+
+
+    sf::ContextSettings settings;
+    settings.antiAliasingLevel = 8;
+
+
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "SnakeCPP", sf::Style::Default, sf::State::Windowed, settings);
     window.setFramerateLimit(144);
 
     Game* game   = new Game(speed, nbFood);
@@ -46,9 +52,9 @@ int main()
         
         // visual update
         auto clockTime = clock(); 
-        if ((clockTime - lastTime) > updateSpeed) {
+        if ((clockTime - lastTime) > game->param->updateSpeed) {
             
-            //game->update();
+            game->update();
             
             window.clear();
             
