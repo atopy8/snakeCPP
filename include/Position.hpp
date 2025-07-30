@@ -1,7 +1,8 @@
 #pragma once 
 
-typedef struct 
+class Position
 {
-    unsigned int x;
-    unsigned int y;
-} Position;
+    public:
+        unsigned int x;
+        unsigned int y;
+};
