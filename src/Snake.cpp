@@ -5,6 +5,7 @@ Snake::Snake(){
     head = new SnakeBit(nullptr);
     tail = new SnakeBit(head);
     tail = new SnakeBit(tail);
+    head->dir = STOP;
 }
 
 Snake::~Snake(){
@@ -64,4 +65,27 @@ bool Snake::stopIfDying(GameParameters* param){
         currentBit = currentBit->prec;
     }
     return false;
+}
+
+bool Snake::isStopped(){
+    return head->dir == STOP;
+}
+
+void Snake::init(){
+    SnakeBit* cur;
+    while(head->next->next != tail){
+        cur = head->next;
+        head->next = cur->next;
+        head->next->prec = head;
+        cur->~SnakeBit();
+    }
+    cur = head;
+    while (cur){
+        cur->pos.x = 0;
+        cur->pos.y = 0;
+        cur->dir = RIGHT;
+        cur->nextDir = RIGHT;
+        cur = cur->next;
+    }
+    
 }

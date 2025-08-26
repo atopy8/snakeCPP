@@ -16,10 +16,12 @@ public:
     Snake();
     ~Snake();
 
+    void init();
     void changeDirection(SnakeDirection dir);
     void update();
     void draw(GameParameters* param, sf::RenderWindow* window);
     void eatIfFood(Food* food, GameParameters* param);
     bool stopIfDying(GameParameters* param);
+    bool isStopped();
 };
 
