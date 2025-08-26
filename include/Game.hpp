@@ -6,13 +6,16 @@
 #include "Snake.hpp"
 #include "Food.hpp"
 #include "GameParameters.hpp"
+#include "GameScreen.hpp"
 
 class Game
 {
 private:
     Snake* snake;
     Food* food;
+    GameScreen* mainScreen;
     unsigned int speed;
+
 
     
 public:
@@ -24,5 +27,6 @@ public:
     void handleInput(sf::Keyboard::Scancode key);
     void draw(sf::RenderWindow* window);
     void update();
+    bool isStopped();
 };
 

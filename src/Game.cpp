@@ -8,6 +8,7 @@ Game::Game(unsigned int speedInit, unsigned int numberFood){
     param = new GameParameters();
     snake = new Snake();
     food = new Food(numberFood, param);
+    mainScreen = new GameScreen(param); 
     
     }
 
@@ -19,42 +20,63 @@ Game::~Game(){
 
 void Game::handleInput(sf::Keyboard::Scancode keyPressed)
 {
-    if (keyPressed == sf::Keyboard::Scancode::W) {
-        // move up
-        std::cout << "up\n";
-        snake->changeDirection(UP);
-    }
-    else if (keyPressed == sf::Keyboard::Scancode::S) {
-        // move down
-        std::cout << "down\n";
-        snake->changeDirection(DOWN);
-    }
-    else if (keyPressed == sf::Keyboard::Scancode::A) {
-        // move left
-        std::cout << "left\n";
-        snake->changeDirection(LEFT);
-    }
-    else if (keyPressed == sf::Keyboard::Scancode::D) {
-        // move right
-        std::cout << "right\n";
-        snake->changeDirection(RIGHT);
+    if (isStopped()){
+        mainScreen->handleInput(keyPressed);
+    }else{
+        if (keyPressed == sf::Keyboard::Scancode::W) {
+            // move up
+            std::cout << "up\n";
+            snake->changeDirection(UP);
+        }
+        else if (keyPressed == sf::Keyboard::Scancode::S) {
+            // move down
+            std::cout << "down\n";
+            snake->changeDirection(DOWN);
+        }
+        else if (keyPressed == sf::Keyboard::Scancode::A) {
+            // move left
+            std::cout << "left\n";
+            snake->changeDirection(LEFT);
+        }
+        else if (keyPressed == sf::Keyboard::Scancode::D) {
+            // move right
+            std::cout << "right\n";
+            snake->changeDirection(RIGHT);
+        }
     }
 }
 
 void Game::startGame() {
-    // initialisation terrain
     // initialisation snake
+    snake->init();
     // initialisation food
+    food->init(param);
+    param->wantStart = false;
 }
 
 void Game::draw(sf::RenderWindow* window) {
-    snake->draw(param, window);
-    food->draw(param, window);
+    if (isStopped()){
+        mainScreen->draw(window);
+    }else{
+        snake->draw(param, window);
+        food->draw(param, window);
+    }
+    
 }
 
 void Game::update(){
+    if (isStopped()){
+        if (!param->wantStart) return;
+        else startGame();
+    }else{
+        snake->eatIfFood(food, param);
+        snake->update();
+        snake->stopIfDying(param);
+    }
     
-    snake->eatIfFood(food, param);
-    snake->update();
-    snake->stopIfDying(param);
+    
+}
+
+bool Game::isStopped(){
+    return snake->isStopped();
 }
