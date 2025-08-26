@@ -1,5 +1,8 @@
 #pragma once
 
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
 class GameParameters{
     private:
     public:
@@ -8,10 +11,10 @@ class GameParameters{
 
         unsigned int nbLin        = 22u;
         unsigned int nbCol        = 40u;
-
-        unsigned int speed        = 10u;
         unsigned int nbFood       = 10u;
 
         unsigned int updateSpeed  = 100000u;
+        bool wantStart            = false;
+        sf::RenderWindow *window;
 
 };
