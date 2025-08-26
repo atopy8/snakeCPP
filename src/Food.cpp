@@ -1,17 +1,22 @@
 #include <stdlib.h>
 #include "../include/Food.hpp"
 
+
+void Food::initPosition(Position* position, GameParameters* param, int i, bool isInit){
+    position->x = rand() % param->nbCol - 1;
+    position->y = rand() % param->nbLin - 1;
+    while (isFoodHere(i, position->x, position->y, isInit)){
+        position->x = rand() % param->nbCol - 1;
+        position->y = rand() % param->nbLin - 1;
+    }
+}
+
 Food::Food(unsigned int number, GameParameters* param)
     : number(number) {
         positionList = new Position*[number];
         for (int i = 0; i<number; i++){
             positionList[i] = new Position;
-            positionList[i]->x = rand() % param->nbCol - 1;
-            positionList[i]->y = rand() % param->nbLin - 1;
-            while (isFoodHereInit(i, positionList[i]->x, positionList[i]->y)){
-                positionList[i]->x = rand() % param->nbCol - 1;
-                positionList[i]->y = rand() % param->nbLin - 1;
-            }
+            initPosition(positionList[i], param, i, true);
         }
     }
 
@@ -23,29 +28,16 @@ Food::~Food(){
 bool Food::eatIfFood(unsigned int x, unsigned int y, GameParameters* param){
     for (int i = 0; i<number; i++){
         if (positionList[i]->x == x && positionList[i]->y == y){
-            positionList[i]->x = rand() % param->nbCol - 1;
-            positionList[i]->y = rand() % param->nbLin - 1;
-            while (isFoodHere(i,positionList[i]->x, positionList[i]->y)){
-                positionList[i]->x = rand() % param->nbCol - 1;
-                positionList[i]->y = rand() % param->nbLin - 1;
-            }
+            initPosition(positionList[i], param, i, false);
             return true;
         }
     }
     return false;
 }
 
-bool Food::isFoodHereInit(unsigned int curIdx, unsigned int x, unsigned int y) {
-    for (int i = 0; i<curIdx; i++){
-        if (positionList[i]->x == x && positionList[i]->y == y){
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Food::isFoodHere(unsigned int curIdx, unsigned int x, unsigned int y) {
-    for (int i = 0; i<number; i++){
+bool Food::isFoodHere(unsigned int curIdx, unsigned int x, unsigned int y, bool isInit) {
+    int born = isInit ? curIdx : number;
+    for (int i = 0; i<born; i++){
         if (i!=curIdx && positionList[i]->x == x && positionList[i]->y == y){
             return true;
         }
@@ -68,4 +60,10 @@ void Food::draw(GameParameters* param, sf::RenderWindow* window){
         window->draw(circle);
     }
     
+}
+
+void Food::init(GameParameters* param){
+    for (int i = 0; i<number; i++){
+        initPosition(positionList[i], param, i, true);
+    }
 }

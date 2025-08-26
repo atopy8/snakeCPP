@@ -16,8 +16,9 @@ public:
     ~Food();
 
 
+    void init(GameParameters* param);
+    void initPosition(Position* position, GameParameters* param, int i, bool isInit);
     bool eatIfFood(unsigned int x, unsigned int y, GameParameters* param);
-    bool isFoodHere(unsigned int curIdx, unsigned int x, unsigned int y);
-    bool isFoodHereInit(unsigned int curIdx, unsigned int x, unsigned int y);
+    bool isFoodHere(unsigned int curIdx, unsigned int x, unsigned int y, bool isInit);
     void draw(GameParameters* param, sf::RenderWindow* window);
 };
