@@ -28,6 +28,7 @@ int main()
     window.setFramerateLimit(144);
 
     Game* game   = new Game(speed, nbFood);
+    game->param->window = &window;
     time_t lastTime = clock();
 
     while (window.isOpen())
