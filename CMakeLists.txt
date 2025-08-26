@@ -12,7 +12,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp src/Game.cpp src/Snake.cpp src/SnakeBit.cpp src/Food.cpp)
+add_executable(main src/main.cpp src/Game.cpp src/Snake.cpp src/SnakeBit.cpp src/Food.cpp src/GameScreen.cpp)
 
 target_include_directories(main PRIVATE include)
 target_compile_features(main PRIVATE cxx_std_17)
