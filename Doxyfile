@@ -1,0 +1,85 @@
+# Configuration Doxygen pour le projet Snake C++
+
+# Informations générales du projet
+PROJECT_NAME           = "Snake Game C++"
+PROJECT_NUMBER         = "v1.0"
+PROJECT_BRIEF          = "Un jeu Snake moderne développé en C++ avec SFML"
+
+# Répertoires de code source
+INPUT                  = ./include \
+                         ./src \
+                         README.md
+
+# Types de fichiers à analyser
+FILE_PATTERNS          = *.cpp \
+                         *.hpp \
+                         *.h \
+                         *.md
+
+# Activation de la récursion dans les sous-dossiers
+RECURSIVE              = YES
+
+# Répertoire de sortie de la documentation
+OUTPUT_DIRECTORY       = ./docs
+
+# Génération HTML
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+
+# Génération LaTeX (PDF)
+GENERATE_LATEX         = NO
+
+# Extraction de la documentation
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+
+# Affichage des fichiers source
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+
+# Graphiques et diagrammes
+HAVE_DOT               = NO
+CLASS_DIAGRAMS         = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Optimisations pour C++
+OPTIMIZE_OUTPUT_FOR_C  = NO
+CPP_CLI_SUPPORT        = NO
+
+# Warnings et erreurs
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+
+# Style de documentation
+JAVADOC_AUTOBRIEF      = YES
+MULTILINE_CPP_IS_BRIEF = NO
+
+# Groupement des classes
+DISTRIBUTE_GROUP_DOC   = NO
+
+# Alias pour raccourcir les commandes
+ALIASES                = "requirement=@par Requirement:^^" \
+                         "design=@par Design:^^"
+
+# Exclusion de certains patterns
+EXCLUDE_PATTERNS       = */build/* \
+                         */.*
+
+# Page principale
+USE_MDFILE_AS_MAINPAGE = README.md
+
+# Configuration des graphiques
+DOT_IMAGE_FORMAT       = png
+INTERACTIVE_SVG        = NO
+
+# Recherche
+SEARCHENGINE           = YES
