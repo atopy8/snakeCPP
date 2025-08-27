@@ -100,7 +100,7 @@ docs/
 └── diagrams/       # Diagrammes générés
 ```
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 snake-cpp/
